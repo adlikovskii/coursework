@@ -5,7 +5,7 @@ from datetime import date
 import configparser
 
 config = configparser.ConfigParser()
-config.read("token.ini")
+config.read("config.ini")
 VK_TOKEN = config["VK"]["token"]
 logging.basicConfig(level=logging.INFO, filename="logging.log",filemode="w",
                     format="%(asctime)s %(levelname)s %(message)s")
