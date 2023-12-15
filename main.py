@@ -50,7 +50,7 @@ class VK:
 
 class YandexDisk:
     def __init__(self, token):
-        self.default_dict = 'VK'
+        self.default_dict = config['Yandex']['default_dict']
         self.token = {'Authorization': token}
         self.url_base = 'https://cloud-api.yandex.net/v1/disk'
         self.url_create_folder = self.url_base + '/resources'
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     vk = VK(VK_TOKEN, input_owner_id)
 
     vk_j = vk.photos()
-    count = 5
+    count = config['VK']['photo_count']
     vk_count = vk_j.get('response').get('count')
     logging.info(f'Профиль имеет {vk_count} фотографий.')
     if count > vk_count:
