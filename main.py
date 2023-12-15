@@ -3,6 +3,7 @@ import json
 import requests
 from datetime import date
 import configparser
+import os
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -118,7 +119,7 @@ if __name__ == "__main__":
     vk = VK(VK_TOKEN, input_owner_id)
 
     vk_j = vk.photos()
-    count = config['VK']['photo_count']
+    count = int(config['VK']['photo_count'])
     vk_count = vk_j.get('response').get('count')
     logging.info(f'Профиль имеет {vk_count} фотографий.')
     if count > vk_count:
@@ -142,9 +143,15 @@ if __name__ == "__main__":
                      'size': 'z'}
         save_json = json.dumps(info_json)
         logging.info(f'Сохранение информации о файле в папку json.')
-        with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg','')}.json", "w") as my_file:
-            my_file.write(save_json)
-        len_photo += 1
+        try:
+            with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg','')}.json", "w") as my_file:
+                my_file.write(save_json)
+            len_photo += 1
+        except FileNotFoundError:
+            os.mkdir('json')
+            with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg','')}.json", "w") as my_file:
+                my_file.write(save_json)
+            len_photo += 1
 
     print(f'Ссылка на Яндекс.Диск: https://disk.yandex.ru/client/disk/{ya.default_dict}')
 
