@@ -2,9 +2,11 @@ import logging
 import json
 import requests
 from datetime import date
-from TOKEN import VK_TOKEN
+import configparser
 
-
+config = configparser.ConfigParser()
+config.read("token.ini")
+VK_TOKEN = config["VK"]["token"]
 logging.basicConfig(level=logging.INFO, filename="logging.log",filemode="w",
                     format="%(asctime)s %(levelname)s %(message)s")
 
@@ -13,20 +15,35 @@ class VK:
     url_base = 'https://api.vk.com/method/'
 
     def __init__(self, token, owner_id):
+        self.token = token
         self.method = 'photos.get?'
-        self.owner_id = owner_id
+        self.id = owner_id
         self.params = {
-            'owner_id': owner_id,
+            'owner_id': self.owner_id(owner_id),
             'album_id': 'profile',
             'rev': False,
             'extended': True,
             'photo_sizes': True,
-            'access_token': token,
+            'access_token': self.token,
             'v': '5.199'
         }
 
+    def owner_id(self, owner_id):
+        logging.info(f'Проверка id на screen_name.')
+        if owner_id.isnumeric():
+            return owner_id
+        else:
+            owner_id_params = {
+                'user_ids': owner_id,
+                'access_token': self.token,
+                'v': '5.199'
+            }
+            response = requests.get(self.url_base + 'users.get?', params=owner_id_params)
+            response = response.json().get('response')
+            return response[0].get('id')
+
     def photos(self):
-        logging.info(f'Запрос фотографий с профиля {self.owner_id} VK.')
+        logging.info(f'Запрос фотографий с профиля {self.id} VK.')
         response = requests.get(self.url_base+self.method, params=self.params)
         return response.json()
 
