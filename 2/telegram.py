@@ -158,6 +158,7 @@ def add_rus(message):
     session.commit()
 
     bot.send_message(message.chat.id, f'Слово {add[0]}, c переводом {add[1]} успешно добавлено в ваш словарь')
+    bot.send_message(message.chat.id, f'Слов в изучении: {len(all_words(id_user))}')
     add.clear()
     create_cards(message)
 
