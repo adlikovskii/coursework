@@ -8,7 +8,7 @@ import os
 config = configparser.ConfigParser()
 config.read("config.ini")
 VK_TOKEN = config["VK"]["token"]
-logging.basicConfig(level=logging.INFO, filename="logging.log",filemode="w",
+logging.basicConfig(level=logging.INFO, filename="logging.log", filemode="w",
                     format="%(asctime)s %(levelname)s %(message)s")
 
 
@@ -144,12 +144,12 @@ if __name__ == "__main__":
         save_json = json.dumps(info_json)
         logging.info(f'Сохранение информации о файле в папку json.')
         try:
-            with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg','')}.json", "w") as my_file:
+            with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg', '')}.json", "w") as my_file:
                 my_file.write(save_json)
             len_photo += 1
         except FileNotFoundError:
             os.mkdir('json')
-            with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg','')}.json", "w") as my_file:
+            with open(f"json/{vk_base_photo[len_photo][1].replace('.jpg', '')}.json", "w") as my_file:
                 my_file.write(save_json)
             len_photo += 1
 

@@ -1,0 +1,12 @@
+[
+  {"model": "default", "pk": 1, "fields": {"eng": "We", "rus": "Мы"}},
+  {"model": "default", "pk": 2, "fields": {"eng": "Dog", "rus": "Собака"}},
+  {"model": "default", "pk": 3, "fields": {"eng": "Black", "rus": "Черный"}},
+  {"model": "default", "pk": 4, "fields": {"eng": "Run", "rus": "Бегать"}},
+  {"model": "default", "pk": 5, "fields": {"eng": "Beautiful", "rus": "Красивый"}},
+  {"model": "default", "pk": 6, "fields": {"eng": "One", "rus": "Один"}},
+  {"model": "default", "pk": 7, "fields": {"eng": "Book", "rus": "Книга"}},
+  {"model": "default", "pk": 8, "fields": {"eng": "You", "rus": "Ты"}},
+  {"model": "default", "pk": 9, "fields": {"eng": "Glass", "rus": "Стекло"}},
+  {"model": "default", "pk": 10, "fields": {"eng": "Python", "rus": "Питон"}}
+]
