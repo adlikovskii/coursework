@@ -53,7 +53,7 @@ def all_words(id_user):
 def random_words(words):
     random_word = random.choice(words)
     random_list = []
-    while len(random_list) < 4 or len(random_list) == random.choice(words):
+    while len(random_list) < 4 or len(random_list) == len(words):
         new_random_word = random.choice(words)
         if new_random_word != random_word:
             if new_random_word[0] not in random_list:
